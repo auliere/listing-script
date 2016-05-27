@@ -26,17 +26,17 @@ import datetime
 if(len(sys.argv) < 3):
     print help_string
 else:
+    files = glob.glob(sys.argv[1])
+    #Constructing list of all libraries
+    libs = glob.glob("lib\*.*")
+    l = ''
+    for lib in libs:
+        l = l + ';' + lib
+    libs = l[1:]
+    compile = False
+    newFiles = []
+    filesCopy = files[:]
     if(len(sys.argv) > 3):
-        files = glob.glob(sys.argv[1])
-        #Constructing list of all libraries
-        libs = glob.glob("lib\*.*")
-        l = ''
-        for lib in libs:
-            l = l + ';' + lib
-        libs = l[1:]
-        compile = False
-        newFiles = []
-        filesCopy = files[:]
         for name in sys.argv[3:]:
             for file in files:
                 if(name in file):
