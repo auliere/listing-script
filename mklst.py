@@ -1,19 +1,20 @@
-#
-#   Autor: Oleg Pedorenko, IP-31
-#   04.10.2015
-#   Program: mklst.py
-#   Call like that:
-#   python program arg1 arg2 [arg3, arg4 ....]
-#   where:
-#       arg1 - name of the file to make a listing for, or
-#              a regular expression for a bunch of such files
-#       arg2 - name of a file for listing output
-#       arg3, arg4, ... - the names of files in the order you want
-#              to see them in the output. For files not listed here
-#              here the order is undefined.
-#   If you want to compile your files using javac to get error
-#   messages, change the compile variable to True.
-#
+
+help_string = """
+  Autor: Oleg Pedorenko, IP-31
+  04.10.2015
+  Program: mklst.py
+  Call like that:
+  python program arg1 arg2 [arg3, arg4 ....]
+  where:
+      arg1 - name of the file to make a listing for, or
+             a regular expression for a bunch of such files
+      arg2 - name of a file for listing output
+      arg3, arg4, ... - the names of files in the order you want
+             to see them in the output. For files not listed here
+             here the order is undefined.
+  If you want to compile your files using javac to get error
+  messages, change the compile variable to True.
+"""
 
 import subprocess
 import os.path
@@ -22,20 +23,18 @@ import glob
 import time
 import datetime
 
-files = glob.glob(sys.argv[1])
-
-#Constructing list of all libraries
-libs = glob.glob("lib\*.*")
-l = ''
-for lib in libs:
-    l = l + ';' + lib
-libs = l[1:]
-compile = False
-
 if(len(sys.argv) < 3):
-    print "Insufficient arguments"
+    print help_string
 else:
     if(len(sys.argv) > 3):
+        files = glob.glob(sys.argv[1])
+        #Constructing list of all libraries
+        libs = glob.glob("lib\*.*")
+        l = ''
+        for lib in libs:
+            l = l + ';' + lib
+        libs = l[1:]
+        compile = False
         newFiles = []
         filesCopy = files[:]
         for name in sys.argv[3:]:
